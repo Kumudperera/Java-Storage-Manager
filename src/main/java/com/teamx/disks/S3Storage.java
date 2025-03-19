@@ -1,6 +1,5 @@
 package com.teamx.disks;
 
-import com.teamx.Storage;
 import com.teamx.StorageException;
 import com.teamx.config.DiskConfig;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
@@ -30,12 +29,13 @@ public class S3Storage implements Storage {
 
     /**
      * Create an S3Storage instance with configuration
+     *
      * @param config Disk configuration
      */
     public S3Storage(DiskConfig config) {
         String accessKey = config.getOption("key");
         String secretKey = config.getOption("secret");
-        String regionName = config.getOption("region", Region.US_EAST_1.id());
+        String regionName = config.getOption("region", "us-east-1");
         this.bucket = config.getOption("bucket");
         this.prefix = config.getOption("prefix", "");
         String url = config.getOption("url", "");
@@ -69,8 +69,9 @@ public class S3Storage implements Storage {
 
     /**
      * Create an S3Storage instance with client and bucket
+     *
      * @param s3Client AWS S3 client
-     * @param bucket S3 bucket name
+     * @param bucket   S3 bucket name
      */
     public S3Storage(S3Client s3Client, String bucket) {
         this(s3Client, bucket, "", "");
@@ -78,10 +79,11 @@ public class S3Storage implements Storage {
 
     /**
      * Create an S3Storage instance with client, bucket, and URL
+     *
      * @param s3Client AWS S3 client
-     * @param bucket S3 bucket name
-     * @param prefix Prefix for all paths (like a folder)
-     * @param baseUrl Base URL for files
+     * @param bucket   S3 bucket name
+     * @param prefix   Prefix for all paths (like a folder)
+     * @param baseUrl  Base URL for files
      */
     public S3Storage(S3Client s3Client, String bucket, String prefix, String baseUrl) {
         this.s3Client = s3Client;
@@ -331,6 +333,7 @@ public class S3Storage implements Storage {
 
     /**
      * Add prefix to the path if configured
+     *
      * @param path Path without prefix
      * @return Path with prefix
      */
@@ -347,6 +350,7 @@ public class S3Storage implements Storage {
 
     /**
      * Remove prefix from path
+     *
      * @param path Path with prefix
      * @return Path without prefix
      */

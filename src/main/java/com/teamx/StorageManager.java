@@ -3,6 +3,7 @@ package com.teamx;
 import com.teamx.config.StorageConfig;
 import com.teamx.disks.LocalStorage;
 import com.teamx.disks.S3Storage;
+import com.teamx.disks.Storage;
 //import com.teamx.disks.FtpStorage;
 
 import java.util.HashMap;
@@ -12,21 +13,6 @@ import java.util.Map;
  * Factory class to manage and provide access to storage implementations
  */
 public class StorageManager {
-    static enum StorageDisk {
-        LOCAL("local"), AWS_S3("aws-s3");
-
-        private final String value;
-
-        private StorageDisk(String value) {
-            this.value = value;
-        }
-
-        public String getValue() {
-            return this.value;
-        }
-    }
-
-
     private final Map<String, Storage> disks = new HashMap<>();
     private String defaultDisk;
 
@@ -39,6 +25,7 @@ public class StorageManager {
 
     /**
      * Initialize StorageManager with configuration
+     *
      * @param config Storage configuration
      */
     public StorageManager(StorageConfig config) {
@@ -47,7 +34,7 @@ public class StorageManager {
         // Setup configured disks
         config.getDisks().forEach((diskName, diskConfig) -> {
             String driver = diskConfig.getDriver();
-            StorageDisk disk = StorageDisk.valueOf(driver);
+            StorageDisk disk = StorageDisk.resolveDisk(driver);
 
             switch (disk) {
                 case LOCAL:
@@ -67,7 +54,8 @@ public class StorageManager {
 
     /**
      * Add a disk to the manager
-     * @param name Disk name
+     *
+     * @param name    Disk name
      * @param storage Storage implementation
      */
     public void addDisk(String name, Storage storage) {
@@ -76,6 +64,7 @@ public class StorageManager {
 
     /**
      * Get a specific disk
+     *
      * @param name Disk name
      * @return Storage implementation
      */
@@ -88,6 +77,7 @@ public class StorageManager {
 
     /**
      * Get the default disk
+     *
      * @return Default storage implementation
      */
     public Storage disk() {
@@ -96,6 +86,7 @@ public class StorageManager {
 
     /**
      * Set the default disk
+     *
      * @param name Disk name
      */
     public void setDefaultDisk(String name) {
@@ -107,6 +98,7 @@ public class StorageManager {
 
     /**
      * Get the current default disk name
+     *
      * @return Default disk name
      */
     public String getDefaultDiskName() {

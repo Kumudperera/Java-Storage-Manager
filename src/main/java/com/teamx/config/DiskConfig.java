@@ -29,9 +29,8 @@ public class DiskConfig {
         return this;
     }
 
-    public DiskConfig addOption(String key, String value) {
+    public void addOption(String key, String value) {
         options.put(key, value);
-        return this;
     }
 
     public String getOption(String key) {

@@ -1,6 +1,5 @@
 package com.teamx.disks;
 
-import com.teamx.Storage;
 import com.teamx.StorageException;
 import com.teamx.config.DiskConfig;
 
@@ -25,6 +24,7 @@ public class LocalStorage implements Storage {
 
     /**
      * Create a LocalStorage instance with configuration
+     *
      * @param config Disk configuration
      */
     public LocalStorage(DiskConfig config) {
@@ -44,6 +44,7 @@ public class LocalStorage implements Storage {
 
     /**
      * Create a LocalStorage instance with base path
+     *
      * @param basePath Base directory for storage
      */
     public LocalStorage(Path basePath) {
@@ -52,8 +53,9 @@ public class LocalStorage implements Storage {
 
     /**
      * Create a LocalStorage instance with base path and URL
+     *
      * @param basePath Base directory for storage
-     * @param baseUrl Base URL for files
+     * @param baseUrl  Base URL for files
      */
     public LocalStorage(Path basePath, String baseUrl) {
         this.basePath = basePath.toAbsolutePath().normalize();
@@ -252,6 +254,7 @@ public class LocalStorage implements Storage {
 
     /**
      * Resolve a path relative to the base path
+     *
      * @param path Relative path
      * @return Absolute path
      */

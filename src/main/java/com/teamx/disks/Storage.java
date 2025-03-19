@@ -1,4 +1,6 @@
-package com.teamx;
+package com.teamx.disks;
+
+import com.teamx.StorageException;
 
 import java.io.InputStream;
 import java.util.List;
@@ -11,6 +13,7 @@ import java.util.Map;
 public interface Storage {
     /**
      * Retrieves a file from storage as an InputStream
+     *
      * @param path Path to the file
      * @return InputStream containing the file content
      * @throws StorageException if file cannot be retrieved
@@ -19,8 +22,9 @@ public interface Storage {
 
     /**
      * Stores a file in the storage
-     * @param path Path where to store the file
-     * @param content InputStream containing the file content
+     *
+     * @param path     Path where to store the file
+     * @param content  InputStream containing the file content
      * @param metadata Optional metadata for the file
      * @return true if successful
      * @throws StorageException if file cannot be stored
@@ -36,6 +40,7 @@ public interface Storage {
 
     /**
      * Checks if a file exists
+     *
      * @param path Path to check
      * @return true if file exists
      */
@@ -43,6 +48,7 @@ public interface Storage {
 
     /**
      * Deletes a file from storage
+     *
      * @param path Path to the file
      * @return true if successfully deleted
      * @throws StorageException if file cannot be deleted
@@ -51,6 +57,7 @@ public interface Storage {
 
     /**
      * Gets a URL for a file
+     *
      * @param path Path to the file
      * @return URL to access the file
      */
@@ -58,6 +65,7 @@ public interface Storage {
 
     /**
      * Lists files in a directory
+     *
      * @param directory Directory path
      * @return List of file paths
      */
@@ -65,6 +73,7 @@ public interface Storage {
 
     /**
      * Gets the size of a file in bytes
+     *
      * @param path Path to the file
      * @return Size in bytes
      * @throws StorageException if size cannot be determined
@@ -73,6 +82,7 @@ public interface Storage {
 
     /**
      * Creates a directory
+     *
      * @param path Directory path
      * @return true if successfully created
      */
@@ -80,6 +90,7 @@ public interface Storage {
 
     /**
      * Deletes a directory
+     *
      * @param path Directory path
      * @return true if successfully deleted
      */
@@ -87,6 +98,7 @@ public interface Storage {
 
     /**
      * Gets the last modified time of a file
+     *
      * @param path Path to the file
      * @return Last modified time in milliseconds
      */
@@ -94,7 +106,8 @@ public interface Storage {
 
     /**
      * Copies a file from one location to another
-     * @param source Source path
+     *
+     * @param source      Source path
      * @param destination Destination path
      * @return true if successful
      */
@@ -102,7 +115,8 @@ public interface Storage {
 
     /**
      * Moves a file from one location to another
-     * @param source Source path
+     *
+     * @param source      Source path
      * @param destination Destination path
      * @return true if successful
      */
